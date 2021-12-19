@@ -2,6 +2,7 @@ type RecipeSchema = {
   id: number;
   name: string;
   ingredients: string[];
+  url: string;
 };
 
 const recipes: RecipeSchema[] = [
@@ -17,6 +18,7 @@ const recipes: RecipeSchema[] = [
       "oil",
       "vanilla",
     ],
+    url: "https://www.bbcgoodfood.com/recipes/eggs-benedict",
   },
   {
     id: 2,
@@ -30,6 +32,7 @@ const recipes: RecipeSchema[] = [
       "oil",
       "vanilla",
     ],
+    url: "https://www.bbcgoodfood.com/recipes/cocoa-puffs",
   },
   {
     id: 3,
@@ -43,6 +46,7 @@ const recipes: RecipeSchema[] = [
       "oil",
       "vanilla",
     ],
+    url: "https://www.bbcgoodfood.com/recipes/chocolate-chip-cookies",
   },
   {
     id: 4,
@@ -56,8 +60,13 @@ const recipes: RecipeSchema[] = [
       "oil",
       "vanilla",
     ],
+    url: "https://www.bbcgoodfood.com/recipes/cinnamon-rolls",
   },
 ];
+
+export function getRecipes() {
+  return recipes;
+}
 
 export function getIngredientsToRecipeIds() {
   const ingredientsToRecipeId: { [ingredient: string]: number[] } = {};
