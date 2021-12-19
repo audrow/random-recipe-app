@@ -4,15 +4,15 @@ A simple program to help you find recipes that have one ingredient.
 
 ## How to get started with this program
 
-- Make sure that you have [NodeJS](https://nodejs.org/en/) and [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) installed
+- Make sure that you have [NodeJS](https://nodejs.org/en/) installed
 - Clone this repository
 - Install the dependencies
   ```
-  yarn install
+  npm install
   ```
 - Run the program
   ```
-  yarn start
+  npm start
   ```
 
 ## TODO
