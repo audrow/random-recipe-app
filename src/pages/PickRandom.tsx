@@ -1,5 +1,5 @@
 import { getIngredients, getRecipeIdsForIngredient } from "../db/index";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 
 export const PickRandom = () => {
@@ -30,7 +30,9 @@ export const PickRandom = () => {
         </div>
       </div>
       <div className="flex justify-center">
-      <button className="bg-pink border-3 border-navy rounded-xl px-5 py-2 text-white text-xl m-8">Wrangle some recipes!</button>
+    <Link to="/">
+     <button className="bg-pink border-3 border-navy rounded-xl px-5 py-2 text-white text-xl m-8">Wrangle some recipes!</button>
+     </Link>
       </div>
     </Layout>
   );

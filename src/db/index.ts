@@ -2,6 +2,7 @@ type RecipeSchema = {
   id: number;
   name: string;
   ingredients: string[];
+  photo: string;
   url: string;
 };
 
@@ -18,6 +19,7 @@ const recipes: RecipeSchema[] = [
       "oil",
       "vanilla",
     ],
+    photo:"https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400",
     url: "https://www.bbcgoodfood.com/recipes/eggs-benedict",
   },
   {
@@ -32,6 +34,7 @@ const recipes: RecipeSchema[] = [
       "oil",
       "vanilla",
     ],
+    photo:"https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400",
     url: "https://www.bbcgoodfood.com/recipes/cocoa-puffs",
   },
   {
@@ -46,6 +49,7 @@ const recipes: RecipeSchema[] = [
       "oil",
       "vanilla",
     ],
+    photo:"https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400",
     url: "https://www.bbcgoodfood.com/recipes/chocolate-chip-cookies",
   },
   {
@@ -60,6 +64,7 @@ const recipes: RecipeSchema[] = [
       "oil",
       "vanilla",
     ],
+    photo:"https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400",
     url: "https://www.bbcgoodfood.com/recipes/cinnamon-rolls",
   },
 ];

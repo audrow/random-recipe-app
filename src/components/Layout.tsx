@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Nav } from "./Nav"
 
-export default function Layout ({children}:any) {
+export default function Layout ({children}:any)  {
     return (
         <div className="bg-yellow min-h-screen">
             <div>
