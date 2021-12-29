@@ -1,7 +1,7 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet } from 'react-router-dom'
 
-const linkStyle = "underline"
-const listStyle = "p-2"
+const linkStyle = 'underline'
+const listStyle = 'p-2'
 
 export const Nav = () => {
   return (
@@ -16,5 +16,5 @@ export const Nav = () => {
       </ul>
       <Outlet />
     </nav>
-  );
-};
+  )
+}

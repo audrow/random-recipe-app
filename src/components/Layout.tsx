@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-import { Nav } from "./Nav"
+import { Link } from 'react-router-dom'
+import { Nav } from './Nav'
 
-export default function Layout ({children}:any)  {
-    return (
+export default function Layout ({ children }:any) {
+  return (
         <div className="bg-yellow min-h-screen">
             <div>
                 <h1 className="font-baloo text-3xl text-center p-5 text-navy">Random Recipe Wrangler!</h1>
@@ -13,5 +13,5 @@ export default function Layout ({children}:any)  {
            <Nav/>
             {children}
         </div>
-    )
+  )
 }
