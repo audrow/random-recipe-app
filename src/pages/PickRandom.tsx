@@ -14,10 +14,6 @@ export const PickRandom = () => {
     <Layout>
       <div className="mx-20">
         <div className="flex justify-between text-xl">
-          {/* <button className="bg-lblue text-white px-5 py-2 rounded-t-2xl w-1/4 border-navy border-x-3 border-t-3">Main Course</button>
-          <button className="bg-lgreen px-5 py-2 rounded-t-2xl w-1/4 border-navy border-3">Appetizer</button>
-          <button className="bg-lgreen px-5 py-2 rounded-t-2xl w-1/4 border-navy border-3">Dessert</button>
-          <button className="bg-lgreen px-5 py-2 rounded-t-2xl w-1/4 border-navy border-3">All Recipes</button> */}
           {tabs.map((tab) =>(
             <button className={tab===selectedTab?selectedTabStyle:unselectedTabStyle}> {tab} </button>
           ))}
@@ -32,6 +28,9 @@ export const PickRandom = () => {
             </button>
           ))}
         </div>
+      </div>
+      <div className="flex justify-center">
+      <button className="bg-pink border-3 border-navy rounded-xl px-5 py-2 text-white text-xl m-8">Wrangle some recipes!</button>
       </div>
     </Layout>
   );
