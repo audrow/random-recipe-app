@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { getRecipeById } from "../db/index";
+import Layout from "../components/Layout";
 
 export const Recipe = () => {
   const params = useParams();
@@ -9,12 +10,10 @@ export const Recipe = () => {
   }
   const ingredients = recipe.ingredients.join(", ");
   return (
-    <div className="App">
-      <div>
-        <h1>{recipe!.name}</h1>
+    <Layout>
+      <h1>{recipe!.name}</h1>
         <p>{ingredients}</p>
-        <a className="App-link" href={recipe.url}>URL</a>
-      </div>
-    </div>
+        <a href={recipe.url}>URL</a>
+    </Layout>
   );
 };

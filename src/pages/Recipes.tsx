@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 
 import { getRecipes } from "../db/index";
+import Layout from "../components/Layout";
 
 export const Recipes = () => {
   const recipes = getRecipes();
   return (
-    <div className="App">
+    <Layout>
       <div>
         <h1>Recipes</h1>
         <ul>
@@ -18,6 +19,6 @@ export const Recipes = () => {
           ))}
         </ul>
       </div>
-    </div>
+    </Layout>
   );
 };

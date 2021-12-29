@@ -1,14 +1,17 @@
 import { Link, Outlet } from "react-router-dom";
 
+const linkStyle = "underline"
+const listStyle = "p-2"
+
 export const Nav = () => {
   return (
-    <nav className="App-header">
+    <nav>
       <ul>
-        <li>
-          <Link className="App-link" to="/">Pick a Random Ingredient!</Link>
+        <li className={listStyle}>
+          <Link className={linkStyle} to="/">Pick a Random Ingredient!</Link>
         </li>
-        <li>
-          <Link className="App-link" to="/recipes">View All Recipes</Link>
+        <li className={listStyle}>
+          <Link className={linkStyle} to="/recipes">View All Recipes</Link>
         </li>
       </ul>
       <Outlet />
