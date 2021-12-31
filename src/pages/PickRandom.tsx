@@ -19,9 +19,10 @@ export const PickRandom = () => {
           ))}
         </div>
         <div className="bg-lblue px-5 py-2 rounded-b-2xl border-navy border-x-3 border-b-3">
-          <h2>I have...</h2>
+          <h2 className="text-navy text-xl m-2">I have...</h2>
+          <input type='text' placeholder=" Type what ingredients you have here" className="block w-full border-2 border-navy rounded-md p-1 my-2 mx-1 focus:border-pink focus:border-solid focus:outline-none"></input>
           {ingredients.map((ingredient) => (
-            <button className="bg-white border-navy border-2 hover:border-2 hover:border-pink active:bg-lt-pink px-2 rounded-md m-1"
+            <button className="bg-white border-navy border-2 hover:border-2 hover:border-pink active:bg-lt-pink px-2 m-1 rounded-md text-navy"
               onClick={() => navigate(`/recipe/${randomRecipeId(ingredient)}`)}
             >
               {ingredient}
