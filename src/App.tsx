@@ -1,12 +1,13 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-unused-vars */
 import * as React from 'react'
 
-import { BrowserRouter, Route, Routes, useSearchParams, useNavigate } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useSearchParams, useNavigate, Link } from 'react-router-dom'
 import seedrandom from 'seedrandom'
 import { Recipe } from './pages/Recipe'
 import { Recipes } from './pages/Recipes'
 import { PickRandom } from './pages/PickRandom'
 import { About } from './pages/About'
-import { Link } from 'react-router-dom'
 // import './App.css'
 
 export default function App () {
@@ -47,7 +48,7 @@ const ingredients: string[] = [
   'mango',
   'watermelon',
   'coconut',
-  'coconut milk',
+  'coconut milk'
 ]
 
 const recipes: string[] = [
@@ -60,27 +61,27 @@ const recipes: string[] = [
   'sandwich',
   'burger',
   'steak',
-  'chicken',
+  'chicken'
 ]
 
 function getIngredients () {
   return ingredients
 }
 
-function getRecipes() {
+function getRecipes () {
   return recipes
 }
 
-function Picker() {
-  let ingredients = getIngredients()
+function Picker () {
+  const ingredients = getIngredients()
 
   const [pickedIngredients, setPickedIngredients] = React.useState<string[]>([])
   const [searchText, setSearchText] = React.useState<string>('')
   const [filteredIngredients, setFilteredIngredients] = React.useState<string[]>([])
   const [isEnableAddButton, setIsEnableAddButton] = React.useState<Boolean>()
 
-  let [searchParams, setSearchParams] = useSearchParams()
-  const searchIngredients = searchParams.get("ingredients")
+  const [searchParams, setSearchParams] = useSearchParams()
+  const searchIngredients = searchParams.get('ingredients')
 
   React.useEffect(() => {
     if (searchIngredients) {
@@ -88,10 +89,10 @@ function Picker() {
     }
   }, [searchIngredients])
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>){
+  function handleSubmit (event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    let formData = new FormData(event.currentTarget)
-    let formIngredient = formData.get('ingredient') as string
+    const formData = new FormData(event.currentTarget)
+    const formIngredient = formData.get('ingredient') as string
     if (filteredIngredients.length === 1) {
       setPickedIngredients([...pickedIngredients, filteredIngredients[0]])
     } else if (
@@ -99,18 +100,18 @@ function Picker() {
       pickedIngredients.includes(formIngredient) ||
       !ingredients.includes(formIngredient)
     ) {
-      return;
+      return
     } else {
       setPickedIngredients([...pickedIngredients, formIngredient])
     }
     setSearchText('')
   }
 
-  function onClickIngredient(ingredient: string) {
+  function onClickIngredient (ingredient: string) {
     setPickedIngredients([...pickedIngredients, ingredient])
   }
 
-  function handleRemove(ingredient: string) {
+  function handleRemove (ingredient: string) {
     setPickedIngredients(pickedIngredients.filter(i => i !== ingredient))
   }
 
@@ -124,9 +125,9 @@ function Picker() {
 
   React.useEffect(() => {
     setFilteredIngredients(ingredients.filter(ingredient => {
-      if(pickedIngredients.includes(ingredient)) {
+      if (pickedIngredients.includes(ingredient)) {
         return false
-      } else if(!searchText) {
+      } else if (!searchText) {
         return true
       } else {
         return ingredient.toLowerCase().startsWith(searchText.toLowerCase())
@@ -173,21 +174,20 @@ function Picker() {
             {ingredient}
           </button>
         ))}
-        {filteredIngredients.length ===0 && <p>No results</p>}
+        {filteredIngredients.length === 0 && <p>No results</p>}
       </form>
       <br/>
-      <Link to={{ pathname: '/random', search: searchParams.toString()}}>
+      <Link to={{ pathname: '/random', search: searchParams.toString() }}>
         <button disabled={pickedIngredients.length < 1}>Wrangle Some Recipes!</button>
       </Link>
     </div>
   )
 }
 
-function Random({ recipesToPick = 3 }) {
-
-  let [searchParams, setSearchParams] = useSearchParams()
-  const searchIngredients = searchParams.get("ingredients")
-  let seed = searchParams.get("seed") as string
+function Random ({ recipesToPick = 3 }: { recipesToPick?: number }) {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const searchIngredients = searchParams.get('ingredients')
+  let seed = searchParams.get('seed') as string
   const [pickedIngredients, setPickedIngredients] = React.useState<string[]>([])
   const [pickedRecipes, setPickedRecipes] = React.useState<string[]>([])
   const navigate = useNavigate()
@@ -196,7 +196,7 @@ function Random({ recipesToPick = 3 }) {
     seed = new Date().getTime().toString()
   }
 
-  function resetSeed() {
+  function resetSeed () {
     setSearchParams({ ingredients: pickedIngredients.join('-') }, { replace: true })
   }
 
@@ -204,7 +204,7 @@ function Random({ recipesToPick = 3 }) {
     if (searchIngredients) {
       setPickedIngredients(searchIngredients.split('-'))
     } else {
-      navigate('/');
+      navigate('/')
     }
   }, [searchIngredients])
 
@@ -213,14 +213,14 @@ function Random({ recipesToPick = 3 }) {
     setSearchParams({ ingredients: pickedIngredients.join('-'), seed }, { replace: true })
   }, [pickedIngredients, seed])
 
-  function handleRemove(ingredient: string) {
+  function handleRemove (ingredient: string) {
     setPickedIngredients(pickedIngredients.filter(i => i !== ingredient))
   }
 
-  function pickRandomRecipes(randomSeed: string) {
+  function pickRandomRecipes (randomSeed: string) {
     const recipes = getRecipes()
 
-    var random = seedrandom(randomSeed)
+    const random = seedrandom(randomSeed)
     const shuffledRecipes = [...recipes].sort(() => random() - 0.5)
     let pickedRecipes: string[] = []
     if (shuffledRecipes.length < recipesToPick) {
@@ -231,7 +231,6 @@ function Random({ recipesToPick = 3 }) {
     setPickedRecipes(pickedRecipes)
   }
 
-
   return (
     <div>
       <Link to="/">
@@ -240,7 +239,7 @@ function Random({ recipesToPick = 3 }) {
       <h2>Random Recipes</h2>
       <h3>Ingredients:</h3>
       { pickedIngredients.map(ingredient => (
-        <button onClick={() => handleRemove(ingredient)}>{ingredient}</button>
+        <button key={ingredient} onClick={() => handleRemove(ingredient)}>{ingredient}</button>
       ))}
       <h3>Recipes</h3>
       <ul>
