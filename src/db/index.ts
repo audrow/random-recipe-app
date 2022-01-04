@@ -1,4 +1,4 @@
-type RecipeSchema = {
+export type RecipeSchema = {
   id: number;
   name: string;
   ingredients: string[];
@@ -69,8 +69,8 @@ const recipes: RecipeSchema[] = [
   }
 ]
 
-export function getRecipes () {
-  return recipes
+export function getRecipes (recipes_: RecipeSchema[] = recipes): RecipeSchema[] {
+  return recipes_
 }
 
 export function getIngredientsToRecipeIds () {
@@ -90,6 +90,17 @@ export function getIngredientsToRecipeIds () {
 
 export function getIngredients () {
   return Object.keys(getIngredientsToRecipeIds())
+}
+
+export function getRecipesWithIngredients(ingredients: string[], recipes: RecipeSchema[] = getRecipes()): RecipeSchema[] {
+  return recipes.filter(recipe => {
+    for (const ingredient of ingredients) {
+      if (!(recipe.ingredients.includes(ingredient))) {
+        return false
+      }
+    }
+    return true
+  })
 }
 
 export function getRecipeIdsForIngredient (ingredient: string) {
