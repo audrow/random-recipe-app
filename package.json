@@ -55,7 +55,9 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-react": "^7.28.0",
+    "jest": "^27.4.5",
     "postcss": "^8.4.5",
-    "tailwindcss": "^3.0.7"
+    "tailwindcss": "^3.0.7",
+    "ts-jest": "^27.1.2"
   }
 }
