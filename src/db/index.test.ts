@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-import { getRecipes, getRecipesWithIngredients } from './index'
+import { getRecipes, getRecipesWithIngredients, getAllIngredients} from './index'
 import type { RecipeSchema } from './index'
 
 const recipes: RecipeSchema[] = [
@@ -70,4 +70,14 @@ test('get several recipes with multiple ingredients', () => {
   expect( getRecipesWithIngredients(['butter', 'chocolate', 'crack'], recipes)).toHaveLength(1)
   expect( getRecipesWithIngredients(['butter', 'chocolate', 'legos'], recipes)).toHaveLength(0)
   expect( getRecipesWithIngredients(['butter', 'chocolate', 'chapstic', 'legos'], recipes)).toHaveLength(0)
+})
+
+test('get all ingredients', () => {
+  const ingredients = getAllIngredients(recipes)
+  expect(ingredients).toBeInstanceOf(Array)
+  expect(ingredients).toHaveLength(4)
+  expect(ingredients).toContain('butter')
+  expect(ingredients).toContain('eggs')
+  expect(ingredients).toContain('chocolate')
+  expect(ingredients).toContain('crack')
 })

@@ -69,30 +69,45 @@ const recipes: RecipeSchema[] = [
   }
 ]
 
-export function getRecipes (recipes_: RecipeSchema[] = recipes): RecipeSchema[] {
+// export function getIngredientsToRecipeIds () {
+//   const ingredientsToRecipeId: { [ingredient: string]: number[] } = {}
+
+//   for (const recipe of recipes) {
+//     for (const ingredient of recipe.ingredients) {
+//       if (!(ingredient in ingredientsToRecipeId)) {
+//         ingredientsToRecipeId[ingredient] = []
+//       }
+//       ingredientsToRecipeId[ingredient].push(recipe.id)
+//     }
+//   }
+
+//   return ingredientsToRecipeId
+// }
+// export function getIngredients () {
+//   return Object.keys(getIngredientsToRecipeIds())
+// }
+
+// export function getRecipeIdsForIngredient (ingredient: string) {
+//   return getIngredientsToRecipeIds()[ingredient]
+// }
+
+export function getRecipes (recipes_ = recipes): RecipeSchema[] {
   return recipes_
 }
 
-export function getIngredientsToRecipeIds () {
-  const ingredientsToRecipeId: { [ingredient: string]: number[] } = {}
-
+export function getAllIngredients(recipes = getRecipes()) {
+  const output: string[] = []
   for (const recipe of recipes) {
     for (const ingredient of recipe.ingredients) {
-      if (!(ingredient in ingredientsToRecipeId)) {
-        ingredientsToRecipeId[ingredient] = []
+      if (!(output.includes(ingredient))) {
+        output.push(ingredient)
       }
-      ingredientsToRecipeId[ingredient].push(recipe.id)
     }
   }
-
-  return ingredientsToRecipeId
+  return output
 }
 
-export function getIngredients () {
-  return Object.keys(getIngredientsToRecipeIds())
-}
-
-export function getRecipesWithIngredients(ingredients: string[], recipes: RecipeSchema[] = getRecipes()): RecipeSchema[] {
+export function getRecipesWithIngredients(ingredients: string[], recipes = getRecipes()): RecipeSchema[] {
   return recipes.filter(recipe => {
     for (const ingredient of ingredients) {
       if (!(recipe.ingredients.includes(ingredient))) {
@@ -103,15 +118,11 @@ export function getRecipesWithIngredients(ingredients: string[], recipes: Recipe
   })
 }
 
-export function getRecipeIdsForIngredient (ingredient: string) {
-  return getIngredientsToRecipeIds()[ingredient]
-}
-
-export function getRecipeById (id: number) {
+export function getRecipeById (id: number, recipes = getRecipes()): RecipeSchema | undefined {
   for (const recipe of recipes) {
     if (recipe.id === id) {
       return recipe
     }
   }
-  return null
+  return undefined
 }
