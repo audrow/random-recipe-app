@@ -69,28 +69,6 @@ const recipes: RecipeSchema[] = [
   }
 ]
 
-// export function getIngredientsToRecipeIds () {
-//   const ingredientsToRecipeId: { [ingredient: string]: number[] } = {}
-
-//   for (const recipe of recipes) {
-//     for (const ingredient of recipe.ingredients) {
-//       if (!(ingredient in ingredientsToRecipeId)) {
-//         ingredientsToRecipeId[ingredient] = []
-//       }
-//       ingredientsToRecipeId[ingredient].push(recipe.id)
-//     }
-//   }
-
-//   return ingredientsToRecipeId
-// }
-// export function getIngredients () {
-//   return Object.keys(getIngredientsToRecipeIds())
-// }
-
-// export function getRecipeIdsForIngredient (ingredient: string) {
-//   return getIngredientsToRecipeIds()[ingredient]
-// }
-
 export function getRecipes (recipes_ = recipes): RecipeSchema[] {
   return recipes_
 }
