@@ -1,12 +1,13 @@
 // todo(mishmishmish) Update the look of this page
-// todo(mishmishmish) Use the layout here
 
 import * as React from 'react'
 
-import { useSearchParams, useNavigate, Link } from 'react-router-dom'
+import { useSearchParams, useNavigate } from 'react-router-dom'
 import seedrandom from 'seedrandom'
 import { getRecipesWithIngredients } from '../db/index'
 import type { RecipeSchema } from '../db/index'
+
+import Layout from '../components/Layout'
 
 function Random ({ recipesToPick = 3 }: { recipesToPick?: number }) {
 
@@ -58,10 +59,7 @@ function Random ({ recipesToPick = 3 }: { recipesToPick?: number }) {
   }
 
   return (
-    <div>
-      <Link to="/">
-        <button>Home</button>
-      </Link>
+    <Layout>
       <h2>Random Recipes</h2>
       <h3>Ingredients:</h3>
       { pickedIngredients.map(ingredient => (
@@ -82,7 +80,7 @@ function Random ({ recipesToPick = 3 }: { recipesToPick?: number }) {
         ))}
       </ul>
       <button onClick={resetSeed}>Pick again</button>
-    </div>
+    </Layout>
   )
 }
 

@@ -1,17 +1,16 @@
 // todo(mishmishmish) Update the look of this page
-// todo(mishmishmish) Use the layout here
 
 import * as React from 'react'
 
 import { useSearchParams, Link } from 'react-router-dom'
 import { getRecipes, getAllIngredients, getRecipesWithIngredients } from '../db/index'
+import Layout from '../components/Layout'
 
 function Picker () {
 
-  const [possibleIngredients, setPossibleIngredients] = React.useState<string[]>(getAllIngredients(getRecipes()))
   const [pickedIngredients, setPickedIngredients] = React.useState<string[]>([])
   const [searchText, setSearchText] = React.useState<string>('')
-  const [filteredIngredients, setFilteredIngredients] = React.useState<string[]>([])
+  const [filteredIngredients, setFilteredIngredients] = React.useState<string[]>(getAllIngredients(getRecipes()))
   const [isEnableAddButton, setIsEnableAddButton] = React.useState<Boolean>()
 
   const [searchParams, setSearchParams] = useSearchParams()
@@ -32,7 +31,7 @@ function Picker () {
     } else if (
       !formIngredient ||
       pickedIngredients.includes(formIngredient) ||
-      !possibleIngredients.includes(formIngredient)
+      !filteredIngredients.includes(formIngredient)
     ) {
       return
     } else {
@@ -56,11 +55,13 @@ function Picker () {
       setSearchParams({}, { replace: true })
     }
     const remainingRecipes = getRecipesWithIngredients(pickedIngredients)
-    setPossibleIngredients(getAllIngredients(remainingRecipes))
+    setFilteredIngredients(getAllIngredients(remainingRecipes))
   }, [pickedIngredients])
 
   React.useEffect(() => {
-    setFilteredIngredients(possibleIngredients.filter(ingredient => {
+    const remainingRecipes = getRecipesWithIngredients(pickedIngredients)
+    const ingredients = getAllIngredients(remainingRecipes)
+    setFilteredIngredients(ingredients.filter(ingredient => {
       if (pickedIngredients.includes(ingredient)) {
         return false
       } else if (!searchText) {
@@ -71,13 +72,13 @@ function Picker () {
     }))
     setIsEnableAddButton(
       (filteredIngredients.length === 1) ||
-      possibleIngredients.map(i => i.toLowerCase()).includes(searchText.toLowerCase())
+      filteredIngredients.map(i => i.toLowerCase()).includes(searchText.toLowerCase())
     )
     console.log()
   }, [searchText, pickedIngredients])
 
   return (
-    <div>
+    <Layout>
       <h2>Picked items</h2>
       <ul>
         {pickedIngredients.map((ingredient, index) => (
@@ -116,7 +117,7 @@ function Picker () {
       <Link to={{ pathname: '/random', search: searchParams.toString() }}>
         <button disabled={pickedIngredients.length < 1}>Wrangle Some Recipes!</button>
       </Link>
-    </div>
+    </Layout>
   )
 }
 
