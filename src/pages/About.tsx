@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Layout from "../components/Layout";
 
-export const About = () => {
+const About = () => {
   return (
     <Layout>
       <div>
@@ -20,3 +20,5 @@ export const About = () => {
     </Layout>
   );
 };
+
+export default About;
