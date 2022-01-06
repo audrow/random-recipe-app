@@ -106,6 +106,7 @@ function Picker () {
           </li>
         ))}
       </ul>
+      <button hidden={pickedIngredients.length === 0} type='button' onClick={() => setPickedIngredients([])}>Remove all</button>
 
       <h2>Pick here</h2>
       <form onSubmit={handleSubmit}>
@@ -123,10 +124,11 @@ function Picker () {
           value={searchText}
           onChange={event => setSearchText(event.target.value)}
           type='text'
-          placeholder='lemon'
+          placeholder='what do you have?'
           name='ingredient'
         />
         <button disabled={!isEnableAddButton} type='submit'>Add</button>
+        <button type='button' disabled={searchText.length < 1} onClick={() => setSearchText('')}>Clear</button>
         <br/>
         <br/>
         {filteredIngredients.map(ingredient => (
