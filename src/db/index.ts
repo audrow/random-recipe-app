@@ -105,7 +105,7 @@ const recipes: RecipeSchema[] = [
   },
 ]
 
-export function getRecipes (recipes_ = recipes, course: CourseAll = 'all'): RecipeSchema[] {
+export function getRecipes (course: CourseAll = 'all', recipes_ = recipes): RecipeSchema[] {
   return recipes_.filter(recipe => recipe.course === course || course === 'all');
 }
 
@@ -118,7 +118,7 @@ export function getAllIngredients(recipes = getRecipes()) {
       }
     }
   }
-  return output
+  return output.sort()
 }
 
 export function getRecipesWithIngredients(ingredients: string[], recipes = getRecipes()): RecipeSchema[] {

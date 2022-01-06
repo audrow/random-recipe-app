@@ -42,17 +42,17 @@ const recipes: RecipeSchema[] = [
 ]
 
 test('get recipes', () => {
-  const recipesPassedIn = getRecipes(recipes)
+  const recipesPassedIn = getRecipes(undefined, recipes)
   expect(recipesPassedIn).toBeInstanceOf(Array)
   expect(recipesPassedIn).toHaveLength(recipes.length)
   expect(recipesPassedIn).toEqual(recipes)
 })
 
 test('get recipes with courses', () => {
-  expect(getRecipes(recipes, 'main')).toHaveLength(1)
-  expect(getRecipes(recipes, 'dessert')).toHaveLength(1)
-  expect(getRecipes(recipes, 'appetizer')).toHaveLength(1)
-  expect(getRecipes(recipes, 'all')).toHaveLength(3)
+  expect(getRecipes('main', recipes)).toHaveLength(1)
+  expect(getRecipes('dessert', recipes)).toHaveLength(1)
+  expect(getRecipes('appetizer', recipes)).toHaveLength(1)
+  expect(getRecipes('all', recipes)).toHaveLength(3)
 })
 
 test('get all recipes with empty ingredients', () => {

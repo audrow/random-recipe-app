@@ -4,23 +4,22 @@ import * as React from 'react'
 
 import { useSearchParams, Link } from 'react-router-dom'
 import { getRecipes, getAllIngredients, getRecipesWithIngredients } from '../db/index'
+import type { CourseAll } from '../db/index'
 import Layout from '../components/Layout'
 
 function Picker () {
 
-  const [pickedIngredients, setPickedIngredients] = React.useState<string[]>([])
-  const [searchText, setSearchText] = React.useState<string>('')
-  const [filteredIngredients, setFilteredIngredients] = React.useState<string[]>(getAllIngredients(getRecipes()))
-  const [isEnableAddButton, setIsEnableAddButton] = React.useState<Boolean>()
+  const validCourses: CourseAll[] = ['main', 'appetizer', 'dessert', 'all']
 
   const [searchParams, setSearchParams] = useSearchParams()
   const searchIngredients = searchParams.get('ingredients')
+  const searchCourse = searchParams.get('course')
 
-  React.useEffect(() => {
-    if (searchIngredients) {
-      setPickedIngredients(searchIngredients.split('-'))
-    }
-  }, [searchIngredients])
+  const [pickedIngredients, setPickedIngredients] = React.useState<string[]>([])
+  const [pickedCourse, setPickedCourse] = React.useState<CourseAll>(validCourses[0])
+  const [searchText, setSearchText] = React.useState<string>('')
+  const [filteredIngredients, setFilteredIngredients] = React.useState<string[]>(getAllIngredients(getRecipes(pickedCourse)))
+  const [isEnableAddButton, setIsEnableAddButton] = React.useState<Boolean>()
 
   function handleSubmit (event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -49,17 +48,33 @@ function Picker () {
   }
 
   React.useEffect(() => {
-    if (pickedIngredients.length > 0) {
-      setSearchParams({ ingredients: pickedIngredients.join('-') }, { replace: true })
-    } else {
-      setSearchParams({}, { replace: true })
+    if (searchIngredients) {
+      setPickedIngredients(searchIngredients.split('-'))
     }
-    const remainingRecipes = getRecipesWithIngredients(pickedIngredients)
+  }, [searchIngredients])
+
+  React.useEffect(() => {
+    if (searchCourse && validCourses.includes(searchCourse as CourseAll)) {
+      setPickedCourse(searchCourse as CourseAll)
+    }
+  }, [searchCourse])
+
+  React.useEffect(() => {
+    setPickedIngredients([])
+  }, [pickedCourse])
+
+  React.useEffect(() => {
+    if (pickedIngredients.length > 0) {
+      setSearchParams({ course: pickedCourse, ingredients: pickedIngredients.join('-') }, { replace: true })
+    } else {
+      setSearchParams({course: pickedCourse}, { replace: true })
+    }
+    const remainingRecipes = getRecipesWithIngredients(pickedIngredients, getRecipes(pickedCourse))
     setFilteredIngredients(getAllIngredients(remainingRecipes))
   }, [pickedIngredients])
 
   React.useEffect(() => {
-    const remainingRecipes = getRecipesWithIngredients(pickedIngredients)
+    const remainingRecipes = getRecipesWithIngredients(pickedIngredients, getRecipes(pickedCourse))
     const ingredients = getAllIngredients(remainingRecipes)
     setFilteredIngredients(ingredients.filter(ingredient => {
       if (pickedIngredients.includes(ingredient)) {
@@ -81,7 +96,7 @@ function Picker () {
     <Layout>
       <h2>Picked items</h2>
       <ul>
-        {pickedIngredients.map((ingredient, index) => (
+        {pickedIngredients.sort().map((ingredient, index) => (
           <li key={index}>
             {ingredient}
             {' '}
@@ -94,6 +109,16 @@ function Picker () {
 
       <h2>Pick here</h2>
       <form onSubmit={handleSubmit}>
+        {validCourses.map(course => (
+          <input key={course} type='button' name='course' value={course}
+          style={
+            pickedCourse === course ? {backgroundColor: '#ff0000'} : {}
+          }
+          onClick={() => setPickedCourse(course)}
+          />
+        ))}
+        <br/>
+        <br/>
         <input
           value={searchText}
           onChange={event => setSearchText(event.target.value)}
