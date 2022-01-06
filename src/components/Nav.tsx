@@ -4,7 +4,7 @@ import { Link, Outlet } from 'react-router-dom'
 const linkStyle = 'underline'
 const listStyle = 'p-2'
 
-export const Nav = () => {
+const Nav = () => {
   return (
     <nav>
       <ul>
@@ -19,3 +19,5 @@ export const Nav = () => {
     </nav>
   )
 }
+
+export default Nav;
