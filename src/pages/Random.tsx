@@ -4,26 +4,39 @@ import * as React from 'react'
 
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import seedrandom from 'seedrandom'
-import { getRecipesWithIngredients } from '../db/index'
-import type { RecipeSchema } from '../db/index'
+import { getRecipes, getRecipesWithIngredients } from '../db/index'
+import type { RecipeSchema, CourseAll } from '../db/index'
 
+import Recipe from '../components/Recipe'
 import Layout from '../components/Layout'
 
 function Random ({ recipesToPick = 3 }: { recipesToPick?: number }) {
 
   const [searchParams, setSearchParams] = useSearchParams()
   const searchIngredients = searchParams.get('ingredients')
-  let seed = searchParams.get('seed') as string
-  const [pickedIngredients, setPickedIngredients] = React.useState<string[]>([])
-  const [pickedRecipes, setPickedRecipes] = React.useState<RecipeSchema[]>([])
-  const navigate = useNavigate()
-
-  if (!seed) {
-    seed = new Date().getTime().toString()
+  let searchCourse = searchParams.get('course') as CourseAll
+  if (!searchCourse) {
+    searchCourse = 'all'
+  }
+  const courseString = {
+    all: 'everything',
+    main: 'main dishes',
+    appetizer: 'appetizers',
+    dessert: 'desserts'
+  }
+  let searchSeed = searchParams.get('seed') as string
+  if (!searchSeed) {
+    searchSeed = new Date().getTime().toString()
   }
 
+  const [pickedIngredients, setPickedIngredients] = React.useState<string[]>([])
+  const [pickedRecipes, setPickedRecipes] = React.useState<RecipeSchema[]>([])
+  const [matchingRecipes, setMatchingRecipes] = React.useState<number>(0)
+  const navigate = useNavigate()
+
+
   function resetSeed () {
-    setSearchParams({ ingredients: pickedIngredients.join('-') }, { replace: true })
+    setSearchParams({course: searchCourse, ingredients: pickedIngredients.join('-') }, { replace: true })
   }
 
   React.useEffect(() => {
@@ -35,16 +48,18 @@ function Random ({ recipesToPick = 3 }: { recipesToPick?: number }) {
   }, [searchIngredients])
 
   React.useEffect(() => {
-    pickRandomRecipes(seed)
-    setSearchParams({ ingredients: pickedIngredients.join('-'), seed }, { replace: true })
-  }, [pickedIngredients, seed])
+    pickRandomRecipes(searchSeed)
+    setSearchParams({ course: searchCourse, ingredients: pickedIngredients.join('-'), seed: searchSeed }, { replace: true })
+  }, [pickedIngredients, searchSeed, searchCourse])
 
   function handleRemove (ingredient: string) {
     setPickedIngredients(pickedIngredients.filter(i => i !== ingredient))
   }
 
   function pickRandomRecipes (randomSeed: string) {
-    const recipes = getRecipesWithIngredients(pickedIngredients)
+    const recipes = getRecipesWithIngredients(pickedIngredients, getRecipes(searchCourse))
+
+    setMatchingRecipes(recipes.length)
 
     const random = seedrandom(randomSeed)
     const shuffledRecipes = [...recipes].sort(() => random() - 0.5)
@@ -60,7 +75,7 @@ function Random ({ recipesToPick = 3 }: { recipesToPick?: number }) {
 
   return (
     <Layout>
-      <h2>Random Recipes</h2>
+      <h2>Showing you {Math.min(recipesToPick, matchingRecipes)} recipes from {courseString[searchCourse]}</h2>
       <h3>Ingredients:</h3>
       { pickedIngredients.map(ingredient => (
         <button key={ingredient} onClick={() => handleRemove(ingredient)}>{ingredient}</button>
@@ -69,17 +84,15 @@ function Random ({ recipesToPick = 3 }: { recipesToPick?: number }) {
       <ul>
         {pickedRecipes.map((recipe, index) => (
           <li key={index}>
-            <p>{recipe.name}</p>
-            <p>
-              {recipe.ingredients.join(', ')}
-            </p>
-            <p>
-              <a href={recipe.url}>Link</a>
-            </p>
+            <Recipe recipe={recipe} />
           </li>
         ))}
       </ul>
-      <button onClick={resetSeed}>Pick again</button>
+      { matchingRecipes > recipesToPick ?
+        <button onClick={resetSeed} disabled={matchingRecipes < recipesToPick}>Pick again</button>
+        :
+        <p>Not enough recipes to choose randomly</p>
+      }
     </Layout>
   )
 }
