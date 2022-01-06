@@ -75,7 +75,9 @@ function Random ({ recipesToPick = 3 }: { recipesToPick?: number }) {
 
   return (
     <Layout>
-      <h2>Showing you {Math.min(recipesToPick, matchingRecipes)} recipes from {courseString[searchCourse]}</h2>
+      <h2>Showing you {Math.min(recipesToPick, matchingRecipes)} recipe{
+        Math.min(recipesToPick, matchingRecipes) > 1 ? 's' : ''
+      } from {courseString[searchCourse]}</h2>
       <h3>Ingredients:</h3>
       { pickedIngredients.map(ingredient => (
         <button key={ingredient} onClick={() => handleRemove(ingredient)}>{ingredient}</button>
