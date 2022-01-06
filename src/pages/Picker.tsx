@@ -85,12 +85,14 @@ function Picker () {
         return ingredient.toLowerCase().startsWith(searchText.toLowerCase())
       }
     }))
+  }, [searchText, pickedIngredients])
+
+  React.useEffect(() => {
     setIsEnableAddButton(
       (filteredIngredients.length === 1) ||
       filteredIngredients.map(i => i.toLowerCase()).includes(searchText.toLowerCase())
     )
-    console.log()
-  }, [searchText, pickedIngredients])
+  }, [filteredIngredients, searchText])
 
   return (
     <Layout>

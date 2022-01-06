@@ -32,6 +32,8 @@ const recipes: RecipeSchema[] = [
     course: 'dessert',
     ingredients: [
       'cocoa',
+      'coconut',
+      'coconut oil',
       'butter',
       'flour',
       'salt',
@@ -48,11 +50,11 @@ const recipes: RecipeSchema[] = [
     course: 'dessert',
     ingredients: [
       'chocolate',
+      'coconut oil',
       'butter',
       'flour',
       'salt',
       'pepper',
-      'oil',
       'vanilla'
     ],
     photo: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400',
