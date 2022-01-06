@@ -1,6 +1,9 @@
+type Course = 'main' | 'dessert' | 'appetizer';
+export type CourseAll = Course | 'all';
 export type RecipeSchema = {
   id: number;
   name: string;
+  course: Course;
   ingredients: string[];
   photo: string;
   url: string;
@@ -10,6 +13,7 @@ const recipes: RecipeSchema[] = [
   {
     id: 1,
     name: 'Eggs Benedict',
+    course: 'main',
     ingredients: [
       'eggs',
       'butter',
@@ -25,6 +29,7 @@ const recipes: RecipeSchema[] = [
   {
     id: 2,
     name: 'Cocoa Puffs',
+    course: 'dessert',
     ingredients: [
       'cocoa',
       'butter',
@@ -40,6 +45,7 @@ const recipes: RecipeSchema[] = [
   {
     id: 3,
     name: 'Chocolate Chip Cookies',
+    course: 'dessert',
     ingredients: [
       'chocolate',
       'butter',
@@ -55,6 +61,7 @@ const recipes: RecipeSchema[] = [
   {
     id: 4,
     name: 'Cinnamon Rolls',
+    course: 'dessert',
     ingredients: [
       'cinnamon',
       'butter',
@@ -66,11 +73,40 @@ const recipes: RecipeSchema[] = [
     ],
     photo: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400',
     url: 'https://www.bbcgoodfood.com/recipes/cinnamon-rolls'
-  }
+  },
+  {
+    id: 5,
+    name: 'Salad',
+    course: 'appetizer',
+    ingredients: [
+      'lettuce',
+      'spinach',
+      'tomato',
+      'onion',
+      'olive oil',
+      'salt',
+      'pepper'
+    ],
+    photo: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400',
+    url: 'https://www.bbcgoodfood.com/recipes/salad'
+  },
+  {
+    id: 6,
+    name: 'Steak',
+    course: 'main',
+    ingredients: [
+      'steak',
+      'butter',
+      'salt',
+      'pepper',
+    ],
+    photo: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400',
+    url: 'https://www.bbcgoodfood.com/recipes/steak'
+  },
 ]
 
-export function getRecipes (recipes_ = recipes): RecipeSchema[] {
-  return recipes_
+export function getRecipes (recipes_ = recipes, course: CourseAll = 'all'): RecipeSchema[] {
+  return recipes_.filter(recipe => recipe.course === course || course === 'all');
 }
 
 export function getAllIngredients(recipes = getRecipes()) {

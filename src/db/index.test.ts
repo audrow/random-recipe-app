@@ -7,6 +7,7 @@ const recipes: RecipeSchema[] = [
   {
     id: 1,
     name: 'Eggs Benedict',
+    course: 'main',
     ingredients: [
       'butter',
       'eggs',
@@ -17,6 +18,7 @@ const recipes: RecipeSchema[] = [
   {
     id: 2,
     name: 'Cocoa Puffs',
+    course: 'appetizer',
     ingredients: [
       'butter',
       'chocolate',
@@ -28,6 +30,7 @@ const recipes: RecipeSchema[] = [
   {
     id: 3,
     name: 'Chocolate Chip Cookies',
+    course: 'dessert',
     ingredients: [
       'butter',
       'eggs',
@@ -38,14 +41,18 @@ const recipes: RecipeSchema[] = [
   },
 ]
 
-test('getRecipes() returns an array of recipes', () => {
-  expect(getRecipes()).toBeInstanceOf(Array)
-  expect(getRecipes().length).toBeGreaterThan(0)
-
+test('get recipes', () => {
   const recipesPassedIn = getRecipes(recipes)
   expect(recipesPassedIn).toBeInstanceOf(Array)
   expect(recipesPassedIn).toHaveLength(recipes.length)
   expect(recipesPassedIn).toEqual(recipes)
+})
+
+test('get recipes with courses', () => {
+  expect(getRecipes(recipes, 'main')).toHaveLength(1)
+  expect(getRecipes(recipes, 'dessert')).toHaveLength(1)
+  expect(getRecipes(recipes, 'appetizer')).toHaveLength(1)
+  expect(getRecipes(recipes, 'all')).toHaveLength(3)
 })
 
 test('get all recipes with empty ingredients', () => {
