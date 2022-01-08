@@ -1,6 +1,9 @@
-type RecipeSchema = {
+type Course = 'main' | 'dessert' | 'appetizer';
+export type CourseAll = Course | 'all';
+export type RecipeSchema = {
   id: number;
   name: string;
+  course: Course;
   ingredients: string[];
   photo: string;
   url: string;
@@ -9,98 +12,133 @@ type RecipeSchema = {
 const recipes: RecipeSchema[] = [
   {
     id: 1,
-    name: "Eggs Benedict",
+    name: 'Eggs Benedict',
+    course: 'main',
     ingredients: [
-      "eggs",
-      "butter",
-      "flour",
-      "salt",
-      "pepper",
-      "oil",
-      "vanilla",
+      'eggs',
+      'butter',
+      'flour',
+      'salt',
+      'pepper',
+      'oil',
+      'vanilla'
     ],
-    photo:"https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400",
-    url: "https://www.bbcgoodfood.com/recipes/eggs-benedict",
+    photo: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400',
+    url: 'https://www.bbcgoodfood.com/recipes/eggs-benedict'
   },
   {
     id: 2,
-    name: "Cocoa Puffs",
+    name: 'Cocoa Puffs',
+    course: 'dessert',
     ingredients: [
-      "cocoa",
-      "butter",
-      "flour",
-      "salt",
-      "pepper",
-      "oil",
-      "vanilla",
+      'cocoa',
+      'coconut',
+      'coconut oil',
+      'butter',
+      'flour',
+      'salt',
+      'pepper',
+      'oil',
+      'vanilla'
     ],
-    photo:"https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400",
-    url: "https://www.bbcgoodfood.com/recipes/cocoa-puffs",
+    photo: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400',
+    url: 'https://www.bbcgoodfood.com/recipes/cocoa-puffs'
   },
   {
     id: 3,
-    name: "Chocolate Chip Cookies",
+    name: 'Chocolate Chip Cookies',
+    course: 'dessert',
     ingredients: [
-      "chocolate",
-      "butter",
-      "flour",
-      "salt",
-      "pepper",
-      "oil",
-      "vanilla",
+      'chocolate',
+      'coconut oil',
+      'butter',
+      'flour',
+      'salt',
+      'pepper',
+      'vanilla'
     ],
-    photo:"https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400",
-    url: "https://www.bbcgoodfood.com/recipes/chocolate-chip-cookies",
+    photo: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400',
+    url: 'https://www.bbcgoodfood.com/recipes/chocolate-chip-cookies'
   },
   {
     id: 4,
-    name: "Cinnamon Rolls",
+    name: 'Cinnamon Rolls',
+    course: 'dessert',
     ingredients: [
-      "cinnamon",
-      "butter",
-      "flour",
-      "salt",
-      "pepper",
-      "oil",
-      "vanilla",
+      'cinnamon',
+      'butter',
+      'flour',
+      'salt',
+      'pepper',
+      'oil',
+      'vanilla'
     ],
-    photo:"https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400",
-    url: "https://www.bbcgoodfood.com/recipes/cinnamon-rolls",
+    photo: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400',
+    url: 'https://www.bbcgoodfood.com/recipes/cinnamon-rolls'
   },
-];
+  {
+    id: 5,
+    name: 'Salad',
+    course: 'appetizer',
+    ingredients: [
+      'lettuce',
+      'spinach',
+      'tomato',
+      'onion',
+      'olive oil',
+      'salt',
+      'pepper'
+    ],
+    photo: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400',
+    url: 'https://www.bbcgoodfood.com/recipes/salad'
+  },
+  {
+    id: 6,
+    name: 'Steak',
+    course: 'main',
+    ingredients: [
+      'steak',
+      'butter',
+      'salt',
+      'pepper',
+    ],
+    photo: 'https://imgr.search.brave.com/2cTll2p8SWNo-YuIl6nxmVB1A47CN1iDCeQNP2I4f-Y/fit/1200/1200/ce/1/aHR0cHM6Ly9yZWNp/cGVmYWlyeS5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMjAv/MTIvc3RlYWstc2lk/ZXMuanBn',
+    url: 'https://www.bbcgoodfood.com/recipes/steak'
+  },
+]
 
-export function getRecipes() {
-  return recipes;
+export function getRecipes (course: CourseAll = 'all', recipes_ = recipes): RecipeSchema[] {
+  return recipes_.filter(recipe => recipe.course === course || course === 'all');
 }
 
-export function getIngredientsToRecipeIds() {
-  const ingredientsToRecipeId: { [ingredient: string]: number[] } = {};
-
+export function getAllIngredients(recipes = getRecipes()) {
+  const output: string[] = []
   for (const recipe of recipes) {
     for (const ingredient of recipe.ingredients) {
-      if (!(ingredient in ingredientsToRecipeId)) {
-        ingredientsToRecipeId[ingredient] = [];
+      if (!(output.includes(ingredient))) {
+        output.push(ingredient)
       }
-      ingredientsToRecipeId[ingredient].push(recipe.id);
     }
   }
-
-  return ingredientsToRecipeId;
+  return output.sort()
 }
 
-export function getIngredients() {
-  return Object.keys(getIngredientsToRecipeIds());
+export function getRecipesWithIngredients(ingredients: string[], recipes = getRecipes()): RecipeSchema[] {
+  return recipes.filter(recipe => {
+    for (const ingredient of ingredients) {
+      if (!(recipe.ingredients.includes(ingredient))) {
+        return false
+      }
+    }
+    return true
+  })
 }
 
-export function getRecipeIdsForIngredient(ingredient: string) {
-  return getIngredientsToRecipeIds()[ingredient];
-}
-
-export function getRecipeById(id: number) {
+export function getRecipeById (id: number, recipes = getRecipes()): RecipeSchema | undefined {
   for (const recipe of recipes) {
     if (recipe.id === id) {
-      return recipe;
+      return recipe
     }
   }
-  return null;
+  return undefined
 }

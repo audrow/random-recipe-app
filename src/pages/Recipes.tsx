@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import * as React from 'react'
 
 import { getRecipes } from "../db/index";
 import Layout from "../components/Layout";
+import Recipe from '../components/Recipe';
 
-export const Recipes = () => {
+const Recipes = () => {
   const recipes = getRecipes();
   return (
     <Layout>
@@ -11,10 +12,8 @@ export const Recipes = () => {
         <h1>Recipes</h1>
         <ul>
           {recipes.map((recipe) => (
-            <li>
-              <Link className="App-link" to={`/recipe/${recipe.id}`}>
-                {recipe.name}
-              </Link>
+            <li key={recipe.id}>
+              <Recipe recipe={recipe} />
             </li>
           ))}
         </ul>
@@ -22,3 +21,5 @@ export const Recipes = () => {
     </Layout>
   );
 };
+
+export default Recipes;
