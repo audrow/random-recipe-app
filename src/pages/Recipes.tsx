@@ -9,14 +9,14 @@ const Recipes = () => {
   return (
     <Layout>
       <div>
-        <h1>Recipes</h1>
-        <ul>
+        <h1 className='text-center'>All Recipes</h1>
+        <div className='flex justify-center'>
+          <div className="flex flex-wrap justify-center max-w-3xl">
           {recipes.map((recipe) => (
-            <li key={recipe.id}>
-              <Recipe recipe={recipe} />
-            </li>
+            <Recipe recipe={recipe} key={recipe.id}/>
           ))}
-        </ul>
+          </div>
+         </div>
       </div>
     </Layout>
   );
