@@ -7,6 +7,8 @@ export type RecipeSchema = {
   ingredients: string[];
   photo: string;
   url: string;
+  cookTime: number;
+  prepTime: number;
 };
 
 const recipes: RecipeSchema[] = [
@@ -24,7 +26,10 @@ const recipes: RecipeSchema[] = [
       'vanilla'
     ],
     photo: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400',
-    url: 'https://www.bbcgoodfood.com/recipes/eggs-benedict'
+    url: 'https://www.bbcgoodfood.com/recipes/eggs-benedict',
+    cookTime: 25,
+    prepTime: 10,
+
   },
   {
     id: 2,
@@ -42,7 +47,9 @@ const recipes: RecipeSchema[] = [
       'vanilla'
     ],
     photo: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400',
-    url: 'https://www.bbcgoodfood.com/recipes/cocoa-puffs'
+    url: 'https://www.bbcgoodfood.com/recipes/cocoa-puffs',
+    cookTime: 25,
+    prepTime: 10,
   },
   {
     id: 3,
@@ -58,7 +65,9 @@ const recipes: RecipeSchema[] = [
       'vanilla'
     ],
     photo: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400',
-    url: 'https://www.bbcgoodfood.com/recipes/chocolate-chip-cookies'
+    url: 'https://www.bbcgoodfood.com/recipes/chocolate-chip-cookies',
+    cookTime: 25,
+    prepTime: 10,
   },
   {
     id: 4,
@@ -74,7 +83,9 @@ const recipes: RecipeSchema[] = [
       'vanilla'
     ],
     photo: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400',
-    url: 'https://www.bbcgoodfood.com/recipes/cinnamon-rolls'
+    url: 'https://www.bbcgoodfood.com/recipes/cinnamon-rolls',
+    cookTime: 25,
+    prepTime: 10,
   },
   {
     id: 5,
@@ -89,8 +100,10 @@ const recipes: RecipeSchema[] = [
       'salt',
       'pepper'
     ],
-    photo: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400',
-    url: 'https://www.bbcgoodfood.com/recipes/salad'
+    photo: 'https://omnivorescookbook.com/wp-content/uploads/2021/12/211214_An-Easy-Chinese-Greens-Recipe_1.jpg',
+    url: 'https://www.bbcgoodfood.com/recipes/salad',
+    cookTime: 25,
+    prepTime: 10,
   },
   {
     id: 6,
@@ -103,7 +116,9 @@ const recipes: RecipeSchema[] = [
       'pepper',
     ],
     photo: 'https://imgr.search.brave.com/2cTll2p8SWNo-YuIl6nxmVB1A47CN1iDCeQNP2I4f-Y/fit/1200/1200/ce/1/aHR0cHM6Ly9yZWNp/cGVmYWlyeS5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMjAv/MTIvc3RlYWstc2lk/ZXMuanBn',
-    url: 'https://www.bbcgoodfood.com/recipes/steak'
+    url: 'https://www.bbcgoodfood.com/recipes/steak',
+    cookTime: 25,
+    prepTime: 10,
   },
 ]
 

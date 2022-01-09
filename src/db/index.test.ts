@@ -13,7 +13,9 @@ const recipes: RecipeSchema[] = [
       'eggs',
     ],
     photo: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400',
-    url: 'https://www.bbcgoodfood.com/recipes/eggs-benedict'
+    url: 'https://www.bbcgoodfood.com/recipes/eggs-benedict',
+    cookTime: 25,
+    prepTime: 10,
   },
   {
     id: 2,
@@ -25,7 +27,9 @@ const recipes: RecipeSchema[] = [
       'crack'
     ],
     photo: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400',
-    url: 'https://www.bbcgoodfood.com/recipes/cocoa-puffs'
+    url: 'https://www.bbcgoodfood.com/recipes/cocoa-puffs',
+    cookTime: 25,
+    prepTime: 10,
   },
   {
     id: 3,
@@ -37,7 +41,9 @@ const recipes: RecipeSchema[] = [
       'chocolate',
     ],
     photo: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/smoked-salmon-scramble-croissants-9fc35c6.jpg?quality=90&webp=true&resize=440,400',
-    url: 'https://www.bbcgoodfood.com/recipes/chocolate-chip-cookies'
+    url: 'https://www.bbcgoodfood.com/recipes/chocolate-chip-cookies',
+    cookTime: 25,
+    prepTime: 10,
   },
 ]
 

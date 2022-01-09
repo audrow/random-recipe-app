@@ -83,7 +83,7 @@ function Random ({ recipesToPick = 3 }: { recipesToPick?: number }) {
         <button key={ingredient} onClick={() => handleRemove(ingredient)}>{ingredient}</button>
       ))}
       <h3>Recipes</h3>
-      <ul>
+      <ul className="flex justify-center space-x-2">
         {pickedRecipes.map((recipe, index) => (
           <li key={index}>
             <Recipe recipe={recipe} />

@@ -6,6 +6,7 @@ import { useSearchParams, Link } from 'react-router-dom'
 import { getRecipes, getAllIngredients, getRecipesWithIngredients } from '../db/index'
 import type { CourseAll } from '../db/index'
 import Layout from '../components/Layout'
+import CourseTab from '../components/CourseTab'
 
 function Picker () {
 
@@ -113,11 +114,17 @@ function Picker () {
       <h2>Pick here</h2>
       <form onSubmit={handleSubmit}>
         {validCourses.map(course => (
-          <input key={course} type='button' name='course' value={course}
-          style={
-            pickedCourse === course ? {backgroundColor: '#ff0000'} : {}
-          }
-          onClick={() => setPickedCourse(course)}
+          // <input key={course} type='button' name='course' value={course}
+          // style={
+          //   pickedCourse === course ? {backgroundColor: '#ff0000'} : {}
+          // }
+          // onClick={() => setPickedCourse(course)}
+          // />
+          <CourseTab
+            isSelected={pickedCourse === course }
+            name={course}
+            onClick={async () => setPickedCourse(course)}
+            key={course}
           />
         ))}
         <br/>
