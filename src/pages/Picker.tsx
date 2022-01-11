@@ -7,6 +7,7 @@ import { getRecipes, getAllIngredients, getRecipesWithIngredients } from '../db/
 import type { CourseAll } from '../db/index'
 import Layout from '../components/Layout'
 import CourseTab from '../components/CourseTab'
+import IngredientButton from '../components/IngredientButton'
 
 function Picker () {
 
@@ -138,11 +139,10 @@ function Picker () {
           <br />
           <br />
           {filteredIngredients.map(ingredient => (
-            <button
-              onClick={() => onClickIngredient(ingredient)}
-              key={ingredient}>
-              {ingredient}
-            </button>
+            <IngredientButton
+              key={ingredient}
+             ingredient={ingredient} onClick={onClickIngredient}/>
+
           ))}
           {filteredIngredients.length === 0 && <p>No results</p>}
         </div>
