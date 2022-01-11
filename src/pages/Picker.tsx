@@ -97,57 +97,55 @@ function Picker () {
 
   return (
     <Layout>
-      <h2>Picked items</h2>
-      <ul>
-        {pickedIngredients.sort().map((ingredient, index) => (
-          <li key={index}>
-            {ingredient}
-            {' '}
-            <button onClick={() => handleRemove(ingredient)}>
-              Remove
-            </button>
-          </li>
-        ))}
-      </ul>
-      <button hidden={pickedIngredients.length === 0} type='button' onClick={() => setPickedIngredients([])}>Remove all</button>
-
       <h2>Pick here</h2>
-      <form onSubmit={handleSubmit}>
-        {validCourses.map(course => (
-          // <input key={course} type='button' name='course' value={course}
-          // style={
-          //   pickedCourse === course ? {backgroundColor: '#ff0000'} : {}
-          // }
-          // onClick={() => setPickedCourse(course)}
-          // />
-          <CourseTab
-            isSelected={pickedCourse === course }
-            name={course}
-            onClick={async () => setPickedCourse(course)}
-            key={course}
+      <form className='mx-20' onSubmit={handleSubmit}>
+        <div className='flex justify-between text-xl'>
+          {validCourses.map(course => (
+            <CourseTab
+              isSelected={pickedCourse === course}
+              name={course}
+              onClick={async () => setPickedCourse(course)}
+              key={course}
+            />
+          ))}
+        </div>
+        <div className='bg-lblue px-5 py-2 rounded-b-2xl border-navy border-x-3 border-b-3'>
+          <h2>Picked items</h2>
+          <ul>
+            {pickedIngredients.sort().map((ingredient, index) => (
+              <li key={index}>
+                {ingredient}
+                {' '}
+                <button onClick={() => handleRemove(ingredient)}>
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+          <div hidden={pickedIngredients.length === 0}>
+            <button  type='button' onClick={() => setPickedIngredients([])}>Remove all</button>
+          </div>
+          <br />
+          <input
+            value={searchText}
+            onChange={event => setSearchText(event.target.value)}
+            type='text'
+            placeholder='what do you have?'
+            name='ingredient'
           />
-        ))}
-        <br/>
-        <br/>
-        <input
-          value={searchText}
-          onChange={event => setSearchText(event.target.value)}
-          type='text'
-          placeholder='what do you have?'
-          name='ingredient'
-        />
-        <button disabled={!isEnableAddButton} type='submit'>Add</button>
-        <button type='button' disabled={searchText.length < 1} onClick={() => setSearchText('')}>Clear</button>
-        <br/>
-        <br/>
-        {filteredIngredients.map(ingredient => (
-          <button
-            onClick={() => onClickIngredient(ingredient)}
-            key={ingredient}>
-            {ingredient}
-          </button>
-        ))}
-        {filteredIngredients.length === 0 && <p>No results</p>}
+          <button disabled={!isEnableAddButton} type='submit'>Add</button>
+          <button type='button' disabled={searchText.length < 1} onClick={() => setSearchText('')}>Clear</button>
+          <br />
+          <br />
+          {filteredIngredients.map(ingredient => (
+            <button
+              onClick={() => onClickIngredient(ingredient)}
+              key={ingredient}>
+              {ingredient}
+            </button>
+          ))}
+          {filteredIngredients.length === 0 && <p>No results</p>}
+        </div>
       </form>
       <br/>
       <Link to={{ pathname: '/random', search: searchParams.toString() }}>
