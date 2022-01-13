@@ -8,6 +8,7 @@ import type { CourseAll } from '../db/index'
 import Layout from '../components/Layout'
 import CourseTab from '../components/CourseTab'
 import IngredientButton from '../components/IngredientButton'
+import SelectedIngredientButton from '../components/SelectedIngredientButton'
 
 function Picker () {
 
@@ -98,7 +99,6 @@ function Picker () {
 
   return (
     <Layout>
-      <h2>Pick here</h2>
       <form className='mx-20' onSubmit={handleSubmit}>
         <div className='flex justify-between text-xl'>
           {validCourses.map(course => (
@@ -111,15 +111,11 @@ function Picker () {
           ))}
         </div>
         <div className='bg-lblue px-5 py-2 rounded-b-2xl border-navy border-x-3 border-b-3'>
-          <h2>Picked items</h2>
+          <h2 className='text-lg'>I have...</h2>
           <ul>
             {pickedIngredients.sort().map((ingredient, index) => (
               <li key={index}>
-                {ingredient}
-                {' '}
-                <button onClick={() => handleRemove(ingredient)}>
-                  Remove
-                </button>
+                <SelectedIngredientButton ingredient={ingredient} onClick={handleRemove}/>
               </li>
             ))}
           </ul>
@@ -127,11 +123,11 @@ function Picker () {
             <button  type='button' onClick={() => setPickedIngredients([])}>Remove all</button>
           </div>
           <br />
-          <input
+          <input className='border-3 border-navy rounded-md pr-7 pl-2 py-1 mb-1'
             value={searchText}
             onChange={event => setSearchText(event.target.value)}
             type='text'
-            placeholder='what do you have?'
+            placeholder='type your ingredients here'
             name='ingredient'
           />
           <button disabled={!isEnableAddButton} type='submit'>Add</button>

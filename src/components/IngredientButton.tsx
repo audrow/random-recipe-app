@@ -9,7 +9,7 @@ type IngredientButtonProps = {
 const IngredientButton = ({ ingredient, onClick }:IngredientButtonProps) => {
   return (
     <button
-    className='bg-white px-2 rounded-md border-navy border-2 m-1 hover:border-pink active:bg-lt-pink px-2 m-1 rounded-md text-navy'
+    className='bg-white px-2 rounded-md border-navy border-2 m-1 hover:border-pink active:bg-lt-pink text-navy'
       onClick={() => onClick(ingredient)}>
       {ingredient}
     </button>)
