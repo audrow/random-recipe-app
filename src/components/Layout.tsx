@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 import Nav from './Nav'
 
-export default function Layout ({ children }:any) {
+export default function Layout ({ children, isHideNav }: {children: any, isHideNav?: boolean}) {
   return (
         <div className="bg-yellow min-h-screen">
             <div>
@@ -11,7 +11,7 @@ export default function Layout ({ children }:any) {
            <Link to="/about">
                 <button className="icon font-lobster text-white text-xl bg-pink border-3 border-navy rounded-full w-8 h-8 align-text-top absolute top-5 right-20">i</button>
             </Link>
-           <Nav/>
+           {!isHideNav && <Nav />}
             {children}
         </div>
   )

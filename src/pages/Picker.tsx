@@ -97,7 +97,7 @@ function Picker () {
   }, [filteredIngredients, searchText])
 
   return (
-    <Layout>
+    <Layout isHideNav={true}>
       <div className='flex flex-col items-center'>
         <form className='w-2/3' onSubmit={handleSubmit}>
           <div className='flex justify-between text-xl'>
