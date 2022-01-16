@@ -4,7 +4,7 @@ import type { RecipeSchema } from '../db/index'
 const Recipe = ({ recipe }: { recipe: RecipeSchema }) => {
   return (
     <div className="  text-navy bg-white border-navy border-3 rounded-xl m-2 px-2 py-1 max-w-lg w-56">
-      <p className='py-1'>{recipe.name}</p>
+      <p className='py-1 text-left'>{recipe.name}</p>
       <img className="border-1 border-navy border-2 rounded-md object-cover object-center aspect-square w-full" src={recipe.photo} alt={recipe.name} width='100px'/>
       {/* <p>
         {recipe.ingredients.join(', ')} 

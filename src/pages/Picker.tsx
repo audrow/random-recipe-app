@@ -10,6 +10,7 @@ import CourseTab from '../components/CourseTab'
 import IngredientButton from '../components/IngredientButton'
 import SelectedIngredientButton from '../components/SelectedIngredientButton'
 
+
 function Picker () {
 
   const validCourses: CourseAll[] = ['main', 'appetizer', 'dessert', 'all']
@@ -99,54 +100,58 @@ function Picker () {
 
   return (
     <Layout>
-      <form className='mx-20' onSubmit={handleSubmit}>
-        <div className='flex justify-between text-xl'>
-          {validCourses.map(course => (
-            <CourseTab
-              isSelected={pickedCourse === course}
-              name={course}
-              onClick={async () => setPickedCourse(course)}
-              key={course}
-            />
-          ))}
-        </div>
-        <div className='bg-lblue px-5 py-2 rounded-b-2xl border-navy border-x-3 border-b-3'>
-          <h2 className='text-lg'>I have...</h2>
-          <ul>
-            {pickedIngredients.sort().map((ingredient, index) => (
-              <li key={index}>
-                <SelectedIngredientButton ingredient={ingredient} onClick={handleRemove}/>
-              </li>
+      <div className='flex flex-col items-center'>
+        <form className='w-2/3' onSubmit={handleSubmit}>
+          <div className='flex justify-between text-xl'>
+            {validCourses.map(course => (
+              <CourseTab
+                isSelected={pickedCourse === course}
+                name={course}
+                onClick={async () => setPickedCourse(course)}
+                key={course}
+              />
             ))}
-          </ul>
-          <div hidden={pickedIngredients.length === 0}>
-            <button  type='button' onClick={() => setPickedIngredients([])}>Remove all</button>
           </div>
-          <br />
-          <input className='border-3 border-navy rounded-md pr-7 pl-2 py-1 mb-1'
-            value={searchText}
-            onChange={event => setSearchText(event.target.value)}
-            type='text'
-            placeholder='type your ingredients here'
-            name='ingredient'
-          />
-          <button disabled={!isEnableAddButton} type='submit'>Add</button>
-          <button type='button' disabled={searchText.length < 1} onClick={() => setSearchText('')}>Clear</button>
-          <br />
-          <br />
-          {filteredIngredients.map(ingredient => (
-            <IngredientButton
-              key={ingredient}
-             ingredient={ingredient} onClick={onClickIngredient}/>
+          <div className='bg-lblue px-5 py-2 rounded-b-2xl border-navy border-x-3 border-b-3'>
+            <h2 className='text-lg'>I have...</h2>
+            <div className='flex flex-row'>
+              {pickedIngredients.sort().map((ingredient, index) => (
+                <SelectedIngredientButton
+                  key={index}
+                  ingredient={ingredient} onClick={handleRemove} />
+              ))}
+            </div> 
+            <div hidden={pickedIngredients.length === 0}>
+              <button type='button' onClick={() => setPickedIngredients([])}>Remove all</button>
+            </div>
+            <br />
+            <input className='border-3 border-navy rounded-lg pr-7 pl-2 py-1 mb-1 mr-2'
+              value={searchText}
+              onChange={event => setSearchText(event.target.value)}
+              type='text'
+              placeholder='type your ingredients here'
+              name='ingredient'
+            />
+            <button disabled={!isEnableAddButton} type='submit'>Add</button>
+            <button type='button' disabled={searchText.length < 1} onClick={() => setSearchText('')}>Clear</button>
+            <br />
+            <br />
+            {filteredIngredients.map(ingredient => (
+              <IngredientButton
+                key={ingredient}
+                ingredient={ingredient} onClick={onClickIngredient} />
 
-          ))}
-          {filteredIngredients.length === 0 && <p>No results</p>}
+            ))}
+            {filteredIngredients.length === 0 && <p>No results</p>}
+          </div>
+        </form>
+        <br />
+        <div className='flex justify-center w-full'>
+          <Link to={{ pathname: '/random', search: searchParams.toString() }}>
+            <button className="bg-pink border-3 border-navy rounded-xl px-5 py-2 text-white text-xl m-8 text-center" disabled={pickedIngredients.length < 1}>Wrangle Some Recipes!</button>
+          </Link>
         </div>
-      </form>
-      <br/>
-      <Link to={{ pathname: '/random', search: searchParams.toString() }}>
-        <button disabled={pickedIngredients.length < 1}>Wrangle Some Recipes!</button>
-      </Link>
+      </div>
     </Layout>
   )
 }
