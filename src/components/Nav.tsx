@@ -6,7 +6,7 @@ const listStyle = 'p-2'
 
 const Nav = () => {
   return (
-    <nav>
+    <nav className='text-center text-navy'>
       <ul>
         <li className={listStyle}>
           <Link className={linkStyle} to="/">Pick a Random Ingredient!</Link>

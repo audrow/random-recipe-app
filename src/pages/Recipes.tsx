@@ -9,7 +9,7 @@ const Recipes = () => {
   return (
     <Layout>
       <div>
-        <h1 className='text-center'>All Recipes</h1>
+        <h1 className='text-center text-navy text-xl'>All Recipes</h1>
         <div className='flex justify-center'>
           <div className="flex flex-wrap justify-center max-w-3xl">
           {recipes.map((recipe) => (
