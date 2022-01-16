@@ -139,7 +139,7 @@ function Picker () {
 
                 ))}
             </div>
-            {filteredIngredients.length === 0 && <p>No results</p>}
+            {filteredIngredients.length === 0 && searchText==="" && <p>No ingredients left to pick :( </p>}
           </div>
         </form>
         <br />
