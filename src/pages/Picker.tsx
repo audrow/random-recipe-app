@@ -1,5 +1,3 @@
-// todo(mishmishmish) Update the look of this page
-
 import * as React from 'react'
 
 import { useSearchParams, Link } from 'react-router-dom'
@@ -113,7 +111,7 @@ function Picker () {
             ))}
           </div>
           <div className='bg-lblue px-5 py-2 rounded-b-2xl border-navy border-x-3 border-b-3'>
-            <h2 className='text-lg'>I have...</h2>
+            <h2 className='text-lg ml-1'>I have...</h2>
             <div className='flex flex-row'>
               {pickedIngredients.sort().map((ingredient) => (
                 <SelectedIngredientButton
@@ -121,28 +119,26 @@ function Picker () {
                   ingredient={ingredient} 
                   onClick={handleRemove} />
               ))}
-            </div> 
-            <div hidden={pickedIngredients.length === 0}>
-              <button type='button' onClick={() => setPickedIngredients([])}>Remove all</button>
             </div>
-            <br />
-            <input className='border-3 border-navy rounded-lg pr-7 pl-2 py-1 mb-1 mr-2'
-              value={searchText}
-              onChange={event => setSearchText(event.target.value)}
-              type='text'
-              placeholder='type your ingredients here'
-              name='ingredient'
-            />
-            <button disabled={!isEnableAddButton} type='submit'>Add</button>
-            <button type='button' disabled={searchText.length < 1} onClick={() => setSearchText('')}>Clear</button>
-            <br />
-            <br />
-            {filteredIngredients.map(ingredient => (
-              <IngredientButton
-                key={ingredient}
-                ingredient={ingredient} onClick={onClickIngredient} />
+            <div className='flex flex-row mt-2'>
+              <input className='border-3 border-navy rounded-l-lg pl-3 h-10 w-2/3'
+                value={searchText}
+                onChange={event => setSearchText(event.target.value)}
+                type='text'
+                placeholder='type your ingredients here'
+                name='ingredient'
+              />
+              <button className='bg-white h-10 border-navy border-y-3 w-1/6' disabled={!isEnableAddButton} type='submit'>Add</button>
+              <button className='bg-lt-pink h-10 rounded-r-lg border-navy border-3 w-1/6' type='button' disabled={searchText.length < 1} onClick={() => setSearchText('')}>Clear</button>
+            </div>
+            <div className='mb-2 mt-3'>
+                {filteredIngredients.map(ingredient => (
+                  <IngredientButton
+                    key={ingredient}
+                    ingredient={ingredient} onClick={onClickIngredient} />
 
-            ))}
+                ))}
+            </div>
             {filteredIngredients.length === 0 && <p>No results</p>}
           </div>
         </form>
