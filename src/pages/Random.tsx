@@ -81,9 +81,14 @@ function Random ({ recipesToPick = 3 }: { recipesToPick?: number }) {
           Math.min(recipesToPick, matchingRecipes) > 1 ? 's' : ''
         } from {courseString[searchCourse]}</h2>
         <h3>Ingredients:</h3>
-        {pickedIngredients.map(ingredient => (
-          <button key={ingredient} onClick={() => handleRemove(ingredient)}>{ingredient}</button>
-        ))}
+        <div className='flex flex-row justify-center'>
+          {pickedIngredients.sort().map(ingredient => (
+            <SelectedIngredientButton
+              key={ingredient}
+              onClick={handleRemove}
+              ingredient={ingredient} />
+          ))}
+        </div>
         <h3>Recipes</h3>
         <ul className="flex justify-center space-x-2">
           {pickedRecipes.map((recipe, index) => (
@@ -93,7 +98,9 @@ function Random ({ recipesToPick = 3 }: { recipesToPick?: number }) {
           ))}
         </ul>
         {matchingRecipes > recipesToPick ?
-          <button onClick={resetSeed} disabled={matchingRecipes < recipesToPick}>Pick again</button>
+          <button className="bg-pink border-3 border-navy rounded-xl px-5 py-2 text-white text-xl m-8 text-center" 
+          onClick={resetSeed} 
+          disabled={matchingRecipes < recipesToPick}>Wrangle more recipes!</button>
           :
           <p>Not enough recipes to choose randomly</p>
         }
