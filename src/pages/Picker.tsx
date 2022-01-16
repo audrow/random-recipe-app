@@ -112,7 +112,7 @@ function Picker () {
           </div>
           <div className='bg-lblue px-5 py-2 rounded-b-2xl border-navy border-x-3 border-b-3'>
             <h2 className='text-lg ml-1'>I have...</h2>
-            <div className='flex flex-row'>
+            <div className='flex flex-row flex-wrap'>
               {pickedIngredients.sort().map((ingredient) => (
                 <SelectedIngredientButton
                   key={ingredient}
