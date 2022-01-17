@@ -128,7 +128,7 @@ function Picker () {
                 placeholder='type your ingredients here'
                 name='ingredient'
               />
-              <button className='bg-white h-10 border-navy border-y-3 w-1/6' disabled={!isEnableAddButton} type='submit'>Add</button>
+              <button className='bg-lrgreen h-10 border-navy border-y-3 w-1/6' disabled={!isEnableAddButton} type='submit'>Add</button>
               <button className='bg-lt-pink h-10 rounded-r-lg border-navy border-3 w-1/6' type='button' disabled={searchText.length < 1} onClick={() => setSearchText('')}>Clear</button>
             </div>
             <div className='mb-2 mt-3 flex flex-wrap justify-center'>

@@ -8,6 +8,7 @@ module.exports = {
       'navy': '#0B3954',
       'lblue': '#739AA5',
       'lgreen': '#9CC0AD',
+      'lrgreen': '#D6F4E4',
       'white': "#ffffff",
       'black': "#000000",
     },
