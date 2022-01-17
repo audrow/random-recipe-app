@@ -20,7 +20,7 @@ function Random ({ recipesToPick = 3 }: { recipesToPick?: number }) {
     searchCourse = 'all'
   }
   const courseString = {
-    all: 'everything',
+    all: 'all courses',
     main: 'main dishes',
     appetizer: 'appetizers',
     dessert: 'desserts'
@@ -80,16 +80,18 @@ function Random ({ recipesToPick = 3 }: { recipesToPick?: number }) {
         <h2>Showing you {Math.min(recipesToPick, matchingRecipes)} recipe{
           Math.min(recipesToPick, matchingRecipes) > 1 ? 's' : ''
         } from {courseString[searchCourse]}</h2>
-        <h3>Ingredients:</h3>
-        <div className='flex flex-row justify-center'>
-          {pickedIngredients.sort().map(ingredient => (
-            <SelectedIngredientButton
-              key={ingredient}
-              onClick={handleRemove}
-              ingredient={ingredient} />
-          ))}
+        <div className='m-3'>
+          <h3>Selected ingredients:</h3>
+          <div className='flex flex-row justify-center'>
+            {pickedIngredients.sort().map(ingredient => (
+              <SelectedIngredientButton
+                key={ingredient}
+                onClick={handleRemove}
+                ingredient={ingredient} />
+            ))}
+          </div>
         </div>
-        <h3>Recipes</h3>
+        {/* <h3 className='text-xl m-3'>Random Recipes</h3> */}
         <ul className="flex justify-center space-x-2">
           {pickedRecipes.map((recipe, index) => (
             <li key={index}>

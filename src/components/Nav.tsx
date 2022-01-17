@@ -9,7 +9,7 @@ const Nav = () => {
     <nav className='text-center text-navy'>
       <ul>
         <li className={listStyle}>
-          <Link className={linkStyle} to="/">Pick a Random Ingredient!</Link>
+          <Link className={linkStyle} to="/">Pick new ingredients!</Link>
         </li>
         <li className={listStyle}>
           <Link className={linkStyle} to="/recipes">View All Recipes</Link>
