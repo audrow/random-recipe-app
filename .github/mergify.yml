@@ -1,0 +1,15 @@
+pull_request_rules:
+  - name: Automatic merge on approval or dependabot PR
+    conditions:
+      - and:
+        - or:
+          - "#approved-reviews-by>=1"
+          - author~=^dependabot(|-preview)\[bot\]$
+        - and:
+          - check-success=Vercel
+          - check-success=build (14)
+          - check-success=build (16)
+          - check-success=build (17)
+    actions:
+      merge:
+        method: squash
