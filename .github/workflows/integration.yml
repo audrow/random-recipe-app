@@ -24,7 +24,5 @@ jobs:
         yarn install
     - name: Build
       run: yarn build
-    - name: Lint
-      run: yarn lint
     - name: Test
       run: CI=true yarn test
