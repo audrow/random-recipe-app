@@ -99,7 +99,7 @@ function Picker () {
   return (
     <Layout isHideNav={true}>
       <div className='flex flex-col items-center'>
-        <form className='w-2/3' onSubmit={handleSubmit}>
+        <form className='w-2/3 xl:w-1/2' onSubmit={handleSubmit}>
           <div className='flex justify-between text-xl'>
             {validCourses.map(course => (
               <CourseTab

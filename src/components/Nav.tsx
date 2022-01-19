@@ -6,11 +6,12 @@ const listStyle = 'p-2'
 
 const Nav = () => {
   return (
-    <nav className='text-center text-navy'>
+    <nav className='text-center text-navy text-xl'>
       <ul>
         <li className={listStyle}>
-          <Link className={linkStyle} to="/">Pick new ingredients!</Link>
+          <Link className={linkStyle} to="/">Find Me Recipes!</Link>
         </li>
+        <br/>
         <li className={listStyle}>
           <Link className={linkStyle} to="/recipes">View All Recipes</Link>
         </li>

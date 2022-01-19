@@ -3,19 +3,19 @@ import Layout from "../components/Layout";
 
 const About = () => {
   return (
-    <Layout>
+    <Layout isHideAboutButton={true}>
       <div>
-          <h1 className="text-navy text-xl text-center p-3">about</h1>
-          <p className="text-center"> finding recipes made dasy. reduce decision paralysis over dinner!</p>
+        <h1 className="text-navy text-xl text-center p-3">About</h1>
+        <p className="text-center"> finding recipes made dasy. reduce decision paralysis over dinner!</p>
       </div>
       <div className="p-10">
-          <h1 className="text-navy text-xl text-center p-3">recipe sources</h1>
-              <p className="text-center">
-                  food52.com <br></br>
-                  bbc.co.uk/food <br></br>
-                  thewoksoflife.com <br></br>
-                  omnivorescookbook.com
-              </p>
+        <h1 className="text-navy text-xl text-center p-3">Recipe Sources</h1>
+        <ul className="text-center underline">
+          <li> <a href='https://food52.com/recipes'>Food52</a> </li>
+          <li> <a href='https://bbc.co.uk/food'>BBC Food</a> </li>
+          <li> <a href='https://thewoksoflife.com'>The Woks of Life</a> </li>
+          <li> <a href='https://omnivorescookbook.com'>Omnivores Cookbook</a> </li>
+        </ul>
       </div>
     </Layout>
   );
