@@ -115,7 +115,7 @@ const recipes: RecipeSchema[] = [
       'salt',
       'pepper',
     ],
-    photo: 'https://imgr.search.brave.com/2cTll2p8SWNo-YuIl6nxmVB1A47CN1iDCeQNP2I4f-Y/fit/1200/1200/ce/1/aHR0cHM6Ly9yZWNp/cGVmYWlyeS5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMjAv/MTIvc3RlYWstc2lk/ZXMuanBn',
+    photo: 'https://www.omahasteaks.com/gifs/990x594/fmbc8az.jpg',
     url: 'https://www.bbcgoodfood.com/recipes/steak',
     cookTime: 25,
     prepTime: 10,
