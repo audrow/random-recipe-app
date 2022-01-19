@@ -9,6 +9,7 @@ import type { RecipeSchema, CourseAll } from '../db/index'
 
 import Recipe from '../components/Recipe'
 import Layout from '../components/Layout'
+import SelectedIngredientButton from '../components/SelectedIngredientButton'
 
 function Random ({ recipesToPick = 3 }: { recipesToPick?: number }) {
 
@@ -19,7 +20,7 @@ function Random ({ recipesToPick = 3 }: { recipesToPick?: number }) {
     searchCourse = 'all'
   }
   const courseString = {
-    all: 'everything',
+    all: 'all courses',
     main: 'main dishes',
     appetizer: 'appetizers',
     dessert: 'desserts'
@@ -75,26 +76,37 @@ function Random ({ recipesToPick = 3 }: { recipesToPick?: number }) {
 
   return (
     <Layout>
-      <h2>Showing you {Math.min(recipesToPick, matchingRecipes)} recipe{
-        Math.min(recipesToPick, matchingRecipes) > 1 ? 's' : ''
-      } from {courseString[searchCourse]}</h2>
-      <h3>Ingredients:</h3>
-      { pickedIngredients.map(ingredient => (
-        <button key={ingredient} onClick={() => handleRemove(ingredient)}>{ingredient}</button>
-      ))}
-      <h3>Recipes</h3>
-      <ul>
-        {pickedRecipes.map((recipe, index) => (
-          <li key={index}>
-            <Recipe recipe={recipe} />
-          </li>
-        ))}
-      </ul>
-      { matchingRecipes > recipesToPick ?
-        <button onClick={resetSeed} disabled={matchingRecipes < recipesToPick}>Pick again</button>
-        :
-        <p>Not enough recipes to choose randomly</p>
-      }
+      <div className='text-center text-navy'>
+        <h2>Showing you {Math.min(recipesToPick, matchingRecipes)} recipe{
+          Math.min(recipesToPick, matchingRecipes) > 1 ? 's' : ''
+        } from {courseString[searchCourse]}</h2>
+        <div className='m-3'>
+          <h3>Selected ingredients:</h3>
+          <div className='flex flex-row justify-center'>
+            {pickedIngredients.sort().map(ingredient => (
+              <SelectedIngredientButton
+                key={ingredient}
+                onClick={handleRemove}
+                ingredient={ingredient} />
+            ))}
+          </div>
+        </div>
+        {/* <h3 className='text-xl m-3'>Random Recipes</h3> */}
+        <ul className="flex justify-center space-x-2">
+          {pickedRecipes.map((recipe, index) => (
+            <li key={index}>
+              <Recipe recipe={recipe} />
+            </li>
+          ))}
+        </ul>
+        {matchingRecipes > recipesToPick ?
+          <button className="bg-pink border-3 border-navy rounded-xl px-5 py-2 text-white text-xl m-8 text-center" 
+          onClick={resetSeed} 
+          disabled={matchingRecipes < recipesToPick}>Wrangle more recipes!</button>
+          :
+          <p>Not enough recipes to choose randomly</p>
+        }
+      </div>
     </Layout>
   )
 }

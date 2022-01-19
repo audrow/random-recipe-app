@@ -7,7 +7,6 @@ pull_request_rules:
           - author~=^dependabot(|-preview)\[bot\]$
         - and:
           - check-success=Vercel
-          - check-success=build (14)
           - check-success=build (16)
           - check-success=build (17)
     actions:
