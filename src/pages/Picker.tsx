@@ -116,7 +116,7 @@ function Picker () {
               {pickedIngredients.sort().map((ingredient) => (
                 <SelectedIngredientButton
                   key={ingredient}
-                  ingredient={ingredient} 
+                  ingredient={ingredient}
                   onClick={handleRemove} />
               ))}
             </div>
@@ -145,7 +145,7 @@ function Picker () {
         <br />
         <div className='flex justify-center w-full'>
           <Link to={{ pathname: '/random', search: searchParams.toString() }}>
-            <button className="bg-pink border-3 border-navy rounded-xl px-5 py-2 text-white text-xl m-8 text-center" disabled={pickedIngredients.length < 1}>Wrangle Some Recipes!</button>
+            <button className="bg-pink border-3 border-navy rounded-xl px-5 py-2 text-white text-xl text-center disabled:bg-gray-400 disabled:border-gray-500 transition ease-in-out duration-300" disabled={pickedIngredients.length < 1}>Wrangle Some Recipes!</button>
           </Link>
         </div>
       </div>

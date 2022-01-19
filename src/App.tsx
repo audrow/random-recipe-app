@@ -5,7 +5,7 @@ import Picker from './pages/Picker'
 import Random from './pages/Random'
 import About from './pages/About'
 import Recipes from './pages/Recipes'
-import './App.css' 
+import './App.css'
 
 export default function App () {
   return (
