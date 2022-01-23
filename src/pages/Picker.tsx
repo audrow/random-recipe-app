@@ -20,23 +20,22 @@ function Picker () {
   const [pickedIngredients, setPickedIngredients] = React.useState<string[]>([])
   const [pickedCourse, setPickedCourse] = React.useState<CourseAll>(validCourses[0])
   const [searchText, setSearchText] = React.useState<string>('')
+  const [searchErrorMessage, setSearchErrorMessage] = React.useState<string>()
   const [filteredIngredients, setFilteredIngredients] = React.useState<string[]>(getAllIngredients(getRecipes(pickedCourse)))
   const [isEnableAddButton, setIsEnableAddButton] = React.useState<Boolean>()
 
-  function handleSubmit (event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    const formData = new FormData(event.currentTarget)
-    const formIngredient = formData.get('ingredient') as string
+  function handleSubmit () {
+    const searchSubmission = searchText.toLowerCase()
     if (filteredIngredients.length === 1) {
       setPickedIngredients([...pickedIngredients, filteredIngredients[0]])
     } else if (
-      !formIngredient ||
-      pickedIngredients.includes(formIngredient) ||
-      !filteredIngredients.includes(formIngredient)
+      !searchSubmission ||
+      pickedIngredients.includes(searchSubmission) ||
+      !filteredIngredients.includes(searchSubmission)
     ) {
       return
     } else {
-      setPickedIngredients([...pickedIngredients, formIngredient])
+      setPickedIngredients([...pickedIngredients, searchSubmission])
     }
     setSearchText('')
   }
@@ -94,12 +93,23 @@ function Picker () {
       (filteredIngredients.length === 1) ||
       filteredIngredients.map(i => i.toLowerCase()).includes(searchText.toLowerCase())
     )
+    setSearchErrorMessage(getSearchTextErrorMessage())
   }, [filteredIngredients, searchText])
+
+  function getSearchTextErrorMessage() {
+    if (filteredIngredients.length !== 0) {
+      return
+    } else if (searchText.length > 0) {
+      return 'No matches found :('
+    } else {
+      return 'No ingredients left to pick :('
+    }
+  }
 
   return (
     <Layout isHideNav={true}>
       <div className='flex flex-col items-center'>
-        <form className='w-2/3 xl:w-1/2' onSubmit={handleSubmit}>
+        <div className='w-2/3 xl:w-1/2'>
           <div className='flex justify-between text-xl'>
             {validCourses.map(course => (
               <CourseTab
@@ -127,8 +137,9 @@ function Picker () {
                 type='text'
                 placeholder='type your ingredients here'
                 name='ingredient'
+                onKeyPress={event => {if (event.key === 'Enter') handleSubmit()}}
               />
-              <button className='bg-lrgreen h-10 border-navy border-y-3 w-1/6' disabled={!isEnableAddButton} type='submit'>Add</button>
+              <button className='bg-lrgreen h-10 border-navy border-y-3 w-1/6' disabled={!isEnableAddButton} onClick={handleSubmit}>Add</button>
               <button className='bg-lt-pink h-10 rounded-r-lg border-navy border-3 w-1/6' type='button' disabled={searchText.length < 1} onClick={() => setSearchText('')}>Clear</button>
             </div>
             <div className='mb-2 mt-3 flex flex-wrap justify-center'>
@@ -136,12 +147,11 @@ function Picker () {
                   <IngredientButton
                     key={ingredient}
                     ingredient={ingredient} onClick={onClickIngredient} />
-
                 ))}
             </div>
-            {filteredIngredients.length === 0 && searchText==="" && <p>No ingredients left to pick :( </p>}
+            <p>{searchErrorMessage}</p>
           </div>
-        </form>
+        </div>
         <br />
         <div className='flex justify-center w-full'>
           <Link to={{ pathname: '/random', search: searchParams.toString() }}>
