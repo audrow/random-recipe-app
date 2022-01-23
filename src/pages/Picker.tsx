@@ -20,6 +20,7 @@ function Picker () {
   const [pickedIngredients, setPickedIngredients] = React.useState<string[]>([])
   const [pickedCourse, setPickedCourse] = React.useState<CourseAll>(validCourses[0])
   const [searchText, setSearchText] = React.useState<string>('')
+  const [searchErrorMessage, setSearchErrorMessage] = React.useState<string>()
   const [filteredIngredients, setFilteredIngredients] = React.useState<string[]>(getAllIngredients(getRecipes(pickedCourse)))
   const [isEnableAddButton, setIsEnableAddButton] = React.useState<Boolean>()
 
@@ -92,7 +93,18 @@ function Picker () {
       (filteredIngredients.length === 1) ||
       filteredIngredients.map(i => i.toLowerCase()).includes(searchText.toLowerCase())
     )
+    setSearchErrorMessage(getSearchTextErrorMessage())
   }, [filteredIngredients, searchText])
+
+  function getSearchTextErrorMessage() {
+    if (filteredIngredients.length !== 0) {
+      return
+    } else if (searchText.length > 0) {
+      return 'No matches found :('
+    } else {
+      return 'No ingredients left to pick :('
+    }
+  }
 
   return (
     <Layout isHideNav={true}>
@@ -135,10 +147,9 @@ function Picker () {
                   <IngredientButton
                     key={ingredient}
                     ingredient={ingredient} onClick={onClickIngredient} />
-
                 ))}
             </div>
-            {filteredIngredients.length === 0 && searchText==="" && <p>No ingredients left to pick :( </p>}
+            <p>{searchErrorMessage}</p>
           </div>
         </div>
         <br />
