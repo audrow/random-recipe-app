@@ -1,5 +1,3 @@
-// todo(mishmishmish) Update the look of this page
-
 import * as React from 'react'
 
 import { useSearchParams, useNavigate } from 'react-router-dom'
@@ -91,7 +89,6 @@ function Random ({ recipesToPick = 3 }: { recipesToPick?: number }) {
             ))}
           </div>
         </div>
-        {/* <h3 className='text-xl m-3'>Random Recipes</h3> */}
         <ul className="flex justify-center space-x-2">
           {pickedRecipes.map((recipe, index) => (
             <li key={index}>
