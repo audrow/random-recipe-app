@@ -2,17 +2,18 @@ import * as React from 'react'
 import { Link, Outlet } from 'react-router-dom'
 
 const linkStyle = 'underline'
-const listStyle = 'p-2'
 
 const Nav = () => {
   return (
     <nav className='text-center text-navy text-xl'>
       <ul>
-        <li className={listStyle}>
-          <Link className={linkStyle} to="/">Find Me Recipes!</Link>
+        <li>
+          <Link className={linkStyle} to="/">
+            <button className="bg-pink border-3 border-navy rounded-xl px-5 py-2 text-white text-xl text-center">Find Me Recipes!</button>
+          </Link>
         </li>
         <br/>
-        <li className={listStyle}>
+        <li>
           <Link className={linkStyle} to="/recipes">View All Recipes</Link>
         </li>
       </ul>
