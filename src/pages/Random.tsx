@@ -101,7 +101,7 @@ function Random ({ recipesToPick = 3 }: { recipesToPick?: number }) {
           onClick={resetSeed} 
           disabled={matchingRecipes < recipesToPick}>Wrangle more recipes!</button>
           :
-          <p>Not enough recipes to choose randomly</p>
+          <p className='m-3'>Not enough recipes to choose randomly</p>
         }
       </div>
     </Layout>
