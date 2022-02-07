@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 
 const About = () => {
   return (
-    <Layout isHideAboutButton={true}>
+    <Layout isHideAboutButton={true} isShowFindRecipeButton={true}>
       <div>
         <h1 className="text-navy text-xl text-center p-3">About</h1>
         <p className="text-center">finding recipes made easy! <br></br>
