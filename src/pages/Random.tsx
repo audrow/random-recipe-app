@@ -33,9 +33,12 @@ function Random ({ recipesToPick = 3 }: { recipesToPick?: number }) {
   const [matchingRecipes, setMatchingRecipes] = React.useState<number>(0)
   const navigate = useNavigate()
 
-
   function resetSeed () {
     setSearchParams({course: searchCourse, ingredients: pickedIngredients.join('-') }, { replace: true })
+  }
+
+  if (!searchIngredients) {
+    navigate('/')
   }
 
   React.useEffect(() => {
