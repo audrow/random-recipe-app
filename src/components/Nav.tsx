@@ -13,7 +13,6 @@ export default function Nav ({isShowFindRecipeButton} : {isShowFindRecipeButton?
             <button className="bg-pink border-3 border-navy rounded-xl px-5 py-2 text-white text-xl text-center">Find me recipes!</button>
           </Link>
         </li>}
-        <br/>
         <li>
           <Link className={linkStyle} to="/recipes">View all recipes</Link>
         </li>

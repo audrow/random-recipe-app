@@ -7,8 +7,8 @@ import Recipe from '../components/Recipe';
 const Recipes = () => {
   const recipes = getRecipes();
   return (
-    <Layout>
-      <div>
+    <Layout isShowFindRecipeButton={true}>
+      <div className='pb-5'>
         <h1 className='text-center text-navy text-xl'>All Recipes</h1>
         <div className='flex justify-center'>
           <div className="flex flex-wrap justify-center max-w-3xl">

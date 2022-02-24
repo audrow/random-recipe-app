@@ -11,7 +11,7 @@ export default function Layout({ children, isHideNav, isHideAboutButton, isShowF
         </Link>
         <div className='flex justify-center'>
           {!isHideAboutButton &&
-            <div className='flex justify-end align-middle w-2/3'>
+            <div className='flex justify-end align-middle w-11/12 md:w-2/3'>
               <Link to="/about">
                 <button className="icon font-lobster text-white text-xl bg-pink border-3 border-navy 
                 rounded-full w-8 h-8 align-text-top mb-4">i</button>

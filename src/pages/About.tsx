@@ -6,7 +6,7 @@ const About = () => {
     <Layout isHideAboutButton={true} isShowFindRecipeButton={true}>
       <div>
         <h1 className="text-navy text-xl text-center p-3">About</h1>
-        <p className="text-center">finding recipes made easy! <br></br>
+        <p className="text-center px-5">finding recipes made easy! <br></br>
 type or select ingredients you have, and see 3 random recipes that has your ingredients.<br></br>
 reduce decision paralysis over dinner!</p>
       </div>

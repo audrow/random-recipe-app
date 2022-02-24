@@ -109,7 +109,7 @@ function Picker () {
   return (
     <Layout isHideNav={true}>
       <div className='flex flex-col items-center'>
-        <div className='w-2/3 xl:w-1/2'>
+        <div className='w-11/12 md:w-2/3 xl:w-1/2'>
           <div className='flex justify-between text-xl'>
             {validCourses.map(course => (
               <CourseTab

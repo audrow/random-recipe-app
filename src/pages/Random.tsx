@@ -89,15 +89,17 @@ function Random ({ recipesToPick = 3 }: { recipesToPick?: number }) {
             ))}
           </div>
         </div>
-        <ul className="flex justify-center space-x-2">
+        <div>
+        <ul className="flex flex-col md:flex-row space-x-1 place-items-center md:justify-center">
           {pickedRecipes.map((recipe, index) => (
             <li key={index}>
               <Recipe recipe={recipe} />
             </li>
           ))}
         </ul>
+        </div>
         {matchingRecipes > recipesToPick ?
-          <button className="bg-pink border-3 border-navy rounded-xl px-5 py-2 text-white text-xl m-8 text-center" 
+          <button className="bg-pink border-3 border-navy rounded-xl px-6 py-2 text-white text-xl m-8 text-center" 
           onClick={resetSeed} 
           disabled={matchingRecipes < recipesToPick}>Wrangle more recipes!</button>
           :
