@@ -130,8 +130,8 @@ function Picker () {
                   onClick={handleRemove} />
               ))}
             </div>
-            <div className='flex flex-row mt-2'>
-              <input className='border-3 border-navy rounded-l-lg pl-3 h-10 w-2/3'
+            <div className='md:flex md:flex-row mt-2'>
+              <input className='border-3 border-navy rounded-lg md:rounded-l-lg pl-3 h-10 md:w-2/3'
                 value={searchText}
                 onChange={event => setSearchText(event.target.value)}
                 type='text'
@@ -139,8 +139,8 @@ function Picker () {
                 name='ingredient'
                 onKeyPress={event => {if (event.key === 'Enter') handleSubmit()}}
               />
-              <button className='bg-lrgreen h-10 border-navy border-y-3 w-1/6' disabled={!isEnableAddButton} onClick={handleSubmit}>Add</button>
-              <button className='bg-lt-pink h-10 rounded-r-lg border-navy border-3 w-1/6' type='button' disabled={searchText.length < 1} onClick={() => setSearchText('')}>Clear</button>
+              <button className='bg-lrgreen h-10 border-navy border-3 rounded-lg md:rounded-none md:border-y-3 md:w-1/6' disabled={!isEnableAddButton} onClick={handleSubmit}>Add</button>
+              <button className='bg-lt-pink h-10 rounded-lg md:rounded-r-lg border-navy border-3 md:w-1/6' type='button' disabled={searchText.length < 1} onClick={() => setSearchText('')}>Clear</button>
             </div>
             <div className='mb-2 mt-3 flex flex-wrap justify-center'>
                 {filteredIngredients.map(ingredient => (
